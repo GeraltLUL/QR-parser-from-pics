@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Awseome Site</title>
+
+  <meta charset="utf-8">
+  <meta name="description" content="DPM - Choose Your Career Paths">
+  <meta name="viewport"
+    content="width=device-width, height=device-height initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="../static/css/style.css" media="screen">
+  <link rel="stylesheet" href="../static/css/style-particles.css" media="screen">
+  <link rel="stylesheet" href="../static/css/main.css" media="screen">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+  <!-- Canvas with main content -->
+  <div class="mainBlock">
+    <!-- <section class="droparea">
+      <i class="far fa-images"></i>
+      <p>Перетащите сюда свои файлы в формате .png или .jpg</p>
+      <p><small>До 20 файлов!</small></p>
+
+      <button type="submit">Отправить</button>
+    </section> -->
+    <br>
+    <div class="containerInput">
+      <form action="/sendDataHandle" method="POST" class="multipart/form-data">
+        <div class="form-group">
+          <label for="exampleInputFN">ФН</label>
+          <input type="text" name="FN" placeholder="ФН">
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="exampleInputFD">ФД</label>
+          <input type="text" name="FD" placeholder="ФД">
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="exampleInputFP">ФП</label>
+          <input type="text" name="FP" placeholder="ФП">
+        </div>
+        <br>
+        <input type="submit" />
+      </form>
+    </div>
+    <br>
+    <div class="container">
+      <h1>ВВЕДИТЕ ДАННЫЕ ВРУЧНУЮ В ФОРМУ СВЕРХУ ИЛИ ВЫБЕРИТЕ ФОТО ПРИ ПОМОЩИ ФОРМЫ СНИЗУ</h1>
+    </div>
+    <br>
+    <div class="container">
+      <form action="http://localhost:5000/sendData" method="POST" enctype="multipart/form-data" id="formUpload">
+        <input type="file" name="pictures" id="fileUpload" multiple>
+      </form>
+    </div>
+  </div>
+
+  <div id="particles-js"></div>
+
+  <script src="../static/js/particles.js" type="text/javascript"></script>
+  <script src="../static/js/app.js" type="text/javascript"></script>
+  <script src="../static/js/main.js" type="text/javascript"></script>
+  <script src="../static/js/script.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.8/download.min.js"></script>
+</body>
+
+</html>

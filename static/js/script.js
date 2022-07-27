@@ -26,15 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(formData.get('files'));
 
 
+        //let url = 'http://localhost:5000/sendData';
         let url = 'http://localhost:5000/sendData';
         fetch(url, {
             method: "POST",
-            body: formData,
+            body: formData
         })
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (res) {
+            .then(response => response.json())
+            .then(res => {
                 console.log('success');
                 console.log(res);
             }).finally(() => {
@@ -44,19 +43,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 //console.log(time);
 
                 fNames.forEach(item => {
-                    fetch(`http://localhost:5000/static/xls/path:${item}`)
-                        .then(res => {
-                            return res.blob();
-                        })
+                    let url = `http://localhost:5000/download/${item}`;
+                    console.log('url', url);
+                    fetch(url)
+                        .then(res => res.blob())
                         .then(blob => {
                             download(blob);
                         });
                 });
 
-                // const timerId = setTimeout(function downloadXLS() {
-
+                // setTimeout(() => {
                 //     fNames.forEach(item => {
-                //         fetch(`http://localhost:5000/static/xls/path:${item}`)
+                //         let url = `http://localhost:5000/download/${item}`;
+                //         console.log(url);
+                //         fetch(url)
                 //             .then(res => {
                 //                 return res.blob();
                 //             })

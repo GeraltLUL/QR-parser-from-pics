@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, safe_join, send_file
 import requests
 import pandas as pd
 import os
@@ -19,14 +19,27 @@ app.config['UPLOAD_XLS_FOLDER'] = './static/data/xls'
 def index():
     return render_template('index.html')
 
+# @app.route("/get-в/<filename>")
+# def get_csv(filename):
+#     # безопасно соединяем базовый каталог и имя файла
+#     safe_path = safe_join(app.config["UPLOAD_XLS_FOLDER"], filename)
+#
+#     print(safe_path)
+#     return send_file(safe_path, as_attachment=True)
+#
 
-@app.route('/static/xls/<path:filename>', methods=['GET', 'POST'])
+@app.route('/download/<filename>', methods=['GET', 'POST'])
 def download(filename):
-    xls = os.path.join(app.root_path, app.config['UPLOAD_XLS_FOLDER'])
-    xls = f"{xls}".replace('.', '')
-    filename = str(filename).split(':')[1]
+    # безопасно соединяем базовый каталог и имя файла
+    safe_path = safe_join(app.config["UPLOAD_XLS_FOLDER"], filename)
+    print(safe_path)    
+    return send_file(safe_path, as_attachment=True)
 
-    return send_from_directory(directory=xls, path=xls + filename, filename=filename)
+    # xls = os.path.join(app.root_path, app.config['UPLOAD_XLS_FOLDER'])
+    # xls = f"{xls}".replace('.', '') + '/'
+    # print(filename)
+    # print(xls)
+    # return send_from_directory(directory=xls, filename=filename, path=xls + filename)
 
 
 @app.route('/sendData', methods=['GET', 'POST'])
@@ -78,6 +91,8 @@ def json2xls(data, filename):
 
     xlsPath = os.path.join(app.config['UPLOAD_XLS_FOLDER'], xlsName)
     df.to_excel(xlsPath, index=False)
+
+    #download(xlsName)
 
 
 def qrReader(img):
